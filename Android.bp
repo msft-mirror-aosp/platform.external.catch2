@@ -48,6 +48,17 @@ cc_library_static {
     ],
 }
 
+// This rule can be used by other external/ projects that depend on catch2
+// without turning off exceptions.
+cc_library_static {
+    name: "libcatch2-upstream",
+    defaults: [
+        "libcatch2-defaults",
+    ],
+    rtti: true,
+    cflags: ["-fexceptions"],
+}
+
 // Configurations meant for validating upstream. Not intended to be used by anything else.
 
 cc_defaults {
@@ -69,12 +80,15 @@ cc_test {
     name: "libcatch2-tests-upstream",
     defaults: [
         "libcatch2-defaults-tests",
-        "libcatch2-defaults", // Note: avoid creating a static lib target with exceptions/rtti.
     ],
 
     gtest: false,
     rtti: true,
     cflags: ["-fexceptions"],
+
+    whole_static_libs: [
+        "libcatch2-upstream",
+    ],
 }
 
 // Android config: RTTI and exceptions are disabled.
