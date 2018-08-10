@@ -34,6 +34,14 @@ namespace Matchers {
             mutable std::string m_cachedToString;
         };
 
+#ifdef __clang__
+#    pragma clang diagnostic push
+#    pragma clang diagnostic ignored "-Wnon-virtual-dtor"
+#endif
+/*
+ * include/internal/catch_matchers.h:38:16: error: 'Catch::Matchers::Impl::MatcherMethod<std::__1::basic_string<char> >' has virtual functions but non-virtual destructor [-Werror,-Wnon-virtual-dtor]
+ */
+
         template<typename ObjectT>
         struct MatcherMethod {
             virtual bool match( ObjectT const& arg ) const = 0;
@@ -42,6 +50,10 @@ namespace Matchers {
         struct MatcherMethod<PtrT*> {
             virtual bool match( PtrT* arg ) const = 0;
         };
+
+#ifdef __clang__
+#    pragma clang diagnostic pop
+#endif
 
         template<typename T>
         struct MatcherBase : MatcherUntypedBase, MatcherMethod<T> {
