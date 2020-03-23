@@ -71,6 +71,7 @@ cc_defaults {
     exclude_srcs: [
         "projects/SelfTest/CompileTimePerfTests/**/*.cpp",
     ],
+    shared_libs: ["liblog"],
 }
 
 // Upstream config: Exceptions are enabled.
