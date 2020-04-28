@@ -71,6 +71,8 @@ namespace TestCaseTracking {
 
     public:
 
+        static TrackerContext& instance();
+
         ITracker& startRun();
         void endRun();
 

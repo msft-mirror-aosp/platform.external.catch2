@@ -305,7 +305,7 @@ struct MyListener : Catch::TestEventListenerBase {
     ~MyListener();
 
     // The whole test run starting
-    void testRunStarting( Catch::TestRunInfo const& testRunInfo ) override {
+    virtual void testRunStarting( Catch::TestRunInfo const& testRunInfo ) override {
         std::cout
             << std::boolalpha
             << "\nEvent: testRunStarting:\n";
@@ -313,7 +313,7 @@ struct MyListener : Catch::TestEventListenerBase {
     }
 
     // The whole test run ending
-    void testRunEnded( Catch::TestRunStats const& testRunStats ) override {
+    virtual void testRunEnded( Catch::TestRunStats const& testRunStats ) override {
         std::cout
             << dashed_line
             << "\nEvent: testRunEnded:\n";
@@ -321,7 +321,7 @@ struct MyListener : Catch::TestEventListenerBase {
     }
 
     // A test is being skipped (because it is "hidden")
-    void skipTest( Catch::TestCaseInfo const& testInfo ) override {
+    virtual void skipTest( Catch::TestCaseInfo const& testInfo ) override {
         std::cout
             << dashed_line
             << "\nEvent: skipTest:\n";
@@ -329,7 +329,7 @@ struct MyListener : Catch::TestEventListenerBase {
     }
 
     // Test cases starting
-    void testCaseStarting( Catch::TestCaseInfo const& testInfo ) override {
+    virtual void testCaseStarting( Catch::TestCaseInfo const& testInfo ) override {
         std::cout
             << dashed_line
             << "\nEvent: testCaseStarting:\n";
@@ -337,30 +337,30 @@ struct MyListener : Catch::TestEventListenerBase {
     }
 
     // Test cases ending
-    void testCaseEnded( Catch::TestCaseStats const& testCaseStats ) override {
+    virtual void testCaseEnded( Catch::TestCaseStats const& testCaseStats ) override {
         std::cout << "\nEvent: testCaseEnded:\n";
         print( std::cout, 1, "testCaseStats", testCaseStats );
     }
 
     // Sections starting
-    void sectionStarting( Catch::SectionInfo const& sectionInfo ) override {
+    virtual void sectionStarting( Catch::SectionInfo const& sectionInfo ) override {
         std::cout << "\nEvent: sectionStarting:\n";
         print( std::cout, 1, "- sectionInfo", sectionInfo );
     }
 
     // Sections ending
-    void sectionEnded( Catch::SectionStats const& sectionStats ) override {
+    virtual void sectionEnded( Catch::SectionStats const& sectionStats ) override {
         std::cout << "\nEvent: sectionEnded:\n";
         print( std::cout, 1, "- sectionStats", sectionStats );
     }
 
     // Assertions before/ after
-    void assertionStarting( Catch::AssertionInfo const& assertionInfo ) override {
+    virtual void assertionStarting( Catch::AssertionInfo const& assertionInfo ) override {
         std::cout << "\nEvent: assertionStarting:\n";
         print( std::cout, 1, "- assertionInfo", assertionInfo );
     }
 
-    bool assertionEnded( Catch::AssertionStats const& assertionStats ) override {
+    virtual bool assertionEnded( Catch::AssertionStats const& assertionStats ) override {
         std::cout << "\nEvent: assertionEnded:\n";
         print( std::cout, 1, "- assertionStats", assertionStats );
         return true;

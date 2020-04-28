@@ -16,7 +16,10 @@ namespace Catch {
         m_stream( openStream() )
     {
         TestSpecParser parser(ITagAliasRegistry::get());
-        if (!data.testsOrTags.empty()) {
+        if (data.testsOrTags.empty()) {
+            parser.parse("~[.]"); // All not hidden tests
+        }
+        else {
             m_hasTestFilters = true;
             for( auto const& testOrTags : data.testsOrTags )
                 parser.parse( testOrTags );

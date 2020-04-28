@@ -55,18 +55,18 @@ namespace Detail {
         return marginComparison(m_value, other, m_margin) || marginComparison(m_value, other, m_epsilon * (m_scale + std::fabs(m_value)));
     }
 
-    void Approx::setMargin(double newMargin) {
-        CATCH_ENFORCE(newMargin >= 0,
-            "Invalid Approx::margin: " << newMargin << '.'
+    void Approx::setMargin(double margin) {
+        CATCH_ENFORCE(margin >= 0,
+            "Invalid Approx::margin: " << margin << '.'
             << " Approx::Margin has to be non-negative.");
-        m_margin = newMargin;
+        m_margin = margin;
     }
 
-    void Approx::setEpsilon(double newEpsilon) {
-        CATCH_ENFORCE(newEpsilon >= 0 && newEpsilon <= 1.0,
-            "Invalid Approx::epsilon: " << newEpsilon << '.'
+    void Approx::setEpsilon(double epsilon) {
+        CATCH_ENFORCE(epsilon >= 0 && epsilon <= 1.0,
+            "Invalid Approx::epsilon: " << epsilon << '.'
             << " Approx::epsilon has to be in [0, 1]");
-        m_epsilon = newEpsilon;
+        m_epsilon = epsilon;
     }
 
 } // end namespace Detail

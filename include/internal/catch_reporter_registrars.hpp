@@ -18,11 +18,11 @@ namespace Catch {
 
         class ReporterFactory : public IReporterFactory {
 
-            IStreamingReporterPtr create( ReporterConfig const& config ) const override {
+            virtual IStreamingReporterPtr create( ReporterConfig const& config ) const override {
                 return std::unique_ptr<T>( new T( config ) );
             }
 
-            std::string getDescription() const override {
+            virtual std::string getDescription() const override {
                 return T::getDescription();
             }
         };
@@ -39,10 +39,10 @@ namespace Catch {
 
         class ListenerFactory : public IReporterFactory {
 
-            IStreamingReporterPtr create( ReporterConfig const& config ) const override {
+            virtual IStreamingReporterPtr create( ReporterConfig const& config ) const override {
                 return std::unique_ptr<T>( new T( config ) );
             }
-            std::string getDescription() const override {
+            virtual std::string getDescription() const override {
                 return std::string();
             }
         };
