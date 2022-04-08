@@ -11,7 +11,6 @@
 #include "catch_enforce.h"
 #include "catch_interfaces_registry_hub.h"
 #include "catch_random_number_generator.h"
-#include "catch_run_context.h"
 #include "catch_string_manip.h"
 #include "catch_test_case_info.h"
 
@@ -37,13 +36,8 @@ namespace Catch {
         }
         return sorted;
     }
-
-    bool isThrowSafe( TestCase const& testCase, IConfig const& config ) {
-        return !testCase.throws() || config.allowThrows();
-    }
-
     bool matchTest( TestCase const& testCase, TestSpec const& testSpec, IConfig const& config ) {
-        return testSpec.matches( testCase ) && isThrowSafe( testCase, config );
+        return testSpec.matches( testCase ) && ( config.allowThrows() || !testCase.throws() );
     }
 
     void enforceNoDuplicateTestCases( std::vector<TestCase> const& functions ) {
@@ -106,7 +100,7 @@ namespace Catch {
     }
 
     std::string extractClassName( StringRef const& classOrQualifiedMethodName ) {
-        std::string className(classOrQualifiedMethodName);
+        std::string className = classOrQualifiedMethodName;
         if( startsWith( className, '&' ) )
         {
             std::size_t lastColons = className.rfind( "::" );

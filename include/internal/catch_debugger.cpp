@@ -12,7 +12,7 @@
 #include "catch_stream.h"
 #include "catch_platform.h"
 
-#if defined(CATCH_PLATFORM_MAC) || defined(CATCH_PLATFORM_IPHONE)
+#ifdef CATCH_PLATFORM_MAC
 
 #  include <assert.h>
 #  include <stdbool.h>

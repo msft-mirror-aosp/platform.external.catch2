@@ -251,13 +251,6 @@ TEST_CASE("CAPTURE can deal with complex expressions involving commas", "[messag
     SUCCEED();
 }
 
-TEST_CASE("CAPTURE parses string and character constants", "[messages][capture]") {
-    CAPTURE(("comma, in string", "escaped, \", "), "single quote in string,',", "some escapes, \\,\\\\");
-    CAPTURE("some, ), unmatched, } prenheses {[<");
-    CAPTURE('"', '\'', ',', '}', ')', '(', '{');
-    SUCCEED();
-}
-
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif

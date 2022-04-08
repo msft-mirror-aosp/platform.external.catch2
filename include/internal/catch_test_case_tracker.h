@@ -133,7 +133,6 @@ namespace TestCaseTracking {
 
     class SectionTracker : public TrackerBase {
         std::vector<std::string> m_filters;
-        std::string m_trimmed_name;
     public:
         SectionTracker( NameAndLocation const& nameAndLocation, TrackerContext& ctx, ITracker* parent );
 
